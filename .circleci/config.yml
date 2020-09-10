@@ -4,7 +4,14 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.6.3-node-browsers
-      - image: circleci/postgres
+      - image: circleci/mysql:8.0.21
+        command: |
+          mysqld --default-authentication-plugin=mysql_native_password
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_DATABASE: ci_test
+
 
     working_directory: ~/repo
 
